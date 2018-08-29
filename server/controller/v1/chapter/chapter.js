@@ -1,5 +1,5 @@
-const { EXISTED_CODE, SUCCESS_CODE } = require('../../helper/ResponseCode');
-const ResponseTemplate = require('../../helper/ResponseTemplate');
+const { EXISTED_CODE, SUCCESS_CODE } = require('../../../helper/ResponseCode');
+const ResponseTemplate = require('../../../helper/ResponseTemplate');
 
 class ChapterController {
 	async list(req, res) {

@@ -1,6 +1,6 @@
-const { EXISTED_CODE, SUCCESS_CODE } = require('../../helper/ResponseCode');
-const ResponseTemplate = require('../../helper/ResponseTemplate');
-const Manga = require('../../models/Manga');
+const { EXISTED_CODE, SUCCESS_CODE } = require('../../../helper/ResponseCode');
+const ResponseTemplate = require('../../../helper/ResponseTemplate');
+const Manga = require('../../../models/Manga');
 
 class MangaController {
 	async list(req, res) {

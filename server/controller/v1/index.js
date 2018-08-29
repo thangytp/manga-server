@@ -1,2 +1,2 @@
-exports * from './user/user';
-exports * from './manga/manga';
+export * from './user/user';
+export * from './manga/manga';
