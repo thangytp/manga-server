@@ -5,6 +5,12 @@ class ResponseTemplate {
 			...obj
 		};
 	}
+	error (obj) {
+		return {
+			success: false,
+			...obj
+		}
+	}
 }
 
 const responseTemplate = new ResponseTemplate();

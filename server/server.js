@@ -23,12 +23,11 @@ const app = express();
 //   err => { console.log('Can not connect to the database'+ err)}
 // );
 
-const routes = require('./routes/Route');
+const routes = require('./routes/v1');
 
 app.use(bodyParser.json());
 app.use(cors());
-// const port = process.env.PORT || 4000;
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 app.use('/api/v1', routes);
 

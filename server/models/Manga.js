@@ -1,4 +1,5 @@
 var bookshelf = require('../bookshelf');
+bookshelf.plugin('pagination');
 var Chapter = require('./Chapter');
 
 var Manga = bookshelf.Model.extend({
