@@ -5,6 +5,8 @@ cors = require('cors'),
 // config = require('./config/DB'),
 mysql = require('mysql');
 
+import Route from './routes/v1/Route';
+
 const app = express();
 
 // app.use(function(req, res, next){
@@ -23,13 +25,12 @@ const app = express();
 //   err => { console.log('Can not connect to the database'+ err)}
 // );
 
-const routes = require('./routes/v1');
 
 app.use(bodyParser.json());
 app.use(cors());
 const port = process.env.PORT || 4000;
 
-app.use('/api/v1', routes);
+app.use('/api/v1', Route);
 
 app.listen(port, function(){
  console.log('Listening on port ' + port);

@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const MangaRoute = express.Router();
-const mangaController = require('../../controller/v1');
+const mangaController = require('../../controller/v1/manga/manga');
 
 // Defined store route
 MangaRoute.post('/create', mangaController.create);
