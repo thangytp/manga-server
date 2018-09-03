@@ -1,8 +1,8 @@
 const crypto = require('crypto');
-const { EXISTED_CODE, SUCCESS_CODE } = require('../../../helper/ResponseCode');
-const ResponseTemplate = require('../../../helper/ResponseTemplate');
+import ResponseCode from '../../../helper/ResponseCode';
+import ResponseTemplate from '../../../helper/ResponseTemplate';
 // Require Post model in our routes module
-const User = require('../../../models/User');
+import User from '../../../models/User';
 
 class UserController {
 	async list(req, res) {
@@ -29,20 +29,17 @@ class UserController {
 	}
 	async create(req, res) {
 		console.log(`Add new user ${req.body.name}`);
-		let name = req.body.name;
-		let email = req.body.email;
-		let password = req.body.password;
-		// let {name, email, email} = {req.body.name, req.body.email, req.body.password};
+		let {name, email, password} = req.body;
 		const {salt, hash} = saltHashPassword(password);
 
 		//validate data
 		if (!name || !email || !password) {
-			// res.send
+			return res.send(ResponseTemplate.error({"message": "Input empty!", 'code': ResponseCode.INPUT_DATA_WRONG_FORMAT, "data": ''}));
 		}
 
 		let userFind = await User.where({email: email}).fetch();
 		if (userFind) {
-			return res.status(200).json({"message": "User existed", 'code': EXISTED_CODE, "data": userFind});
+			return res.send({"message": "The email is taken!", 'code': ResponseCode.EXISTED_CODE, "data": email});
 		}
 
 		let user = new User({
@@ -53,11 +50,11 @@ class UserController {
 		});
 		await user.save()
 		.then(user => {
-			res.status(200).json({"message": "Create user successfully", "code": SUCCESS_CODE,"data": user});
+			res.status(200).json({"message": "Create user successfully", "code": ResponseCode.SUCCESS,"data": user});
 		})
 		.catch(err => {
 			console.log(err);
-			res.status(400).send({"message": 'Unable to create user', "code": EXISTED_CODE, 'data': ''});
+			res.status(400).send({"message": 'Unable to create user', "code": ResponseCode.EXISTED_CODE, 'data': ''});
 		});
 	}
 }
