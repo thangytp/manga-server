@@ -1,1 +1,1 @@
-# manga-server
+# Back-end source for manga site
