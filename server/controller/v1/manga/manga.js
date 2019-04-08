@@ -61,7 +61,7 @@ class MangaController {
 		let id = req.params.id;
 		let manga = await Manga.where({id: id}).fetch();
 		if (!manga) {
-			return res.send(ResponseTemplate.error({"message": "Manga is not exist", 'code': ResponseCode.DATA_NOT_FOUND}));
+			return res.send(ResponseTemplate.error({"message": "Manga does not exist", 'code': ResponseCode.DATA_NOT_FOUND}));
 		}
 
 		let {name, slug, other_name, status, description, cover} = req.body;

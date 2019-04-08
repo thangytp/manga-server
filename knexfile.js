@@ -3,13 +3,16 @@
 module.exports = {
     client: 'mysql',
     connection: {
-      // host     : 'docker.local',
-      host     : 'localhost',
+      host     : 'docker.local',
       user     : 'root',
-      password : '',
-      // password : 'root',
+      password : 'root',
       database : 'manga',
-      charset  : 'utf8'
+      charset  : 'utf8',
+        // host     : 'localhost',
+        // user     : 'root',
+        // password : '',
+        // database : 'manga',
+        // charset  : 'utf8'
     },
     pool: {
       min: 2,
