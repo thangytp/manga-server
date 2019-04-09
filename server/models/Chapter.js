@@ -1,4 +1,5 @@
 var bookshelf = require('../bookshelf');
+bookshelf.plugin('pagination');
 var Manga = require('./Manga');
 
 var Chapter = bookshelf.Model.extend({
@@ -9,3 +10,5 @@ var Chapter = bookshelf.Model.extend({
 		return this.belongsToMany(Manga);
 	}
 });
+
+module.exports = Chapter;
