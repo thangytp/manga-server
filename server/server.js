@@ -1,13 +1,18 @@
+require('dotenv').config();
+
 const express = require('express'),
 path = require('path'),
 bodyParser = require('body-parser'),
 cors = require('cors'),
-// config = require('./config/DB'),
 mysql = require('mysql');
 
+import * as config from './config/config';
 import Route from './routes/v1/Route';
 
 const app = express();
+
+const environment = process.env.NODE_ENV; //development
+const stage = config.config[environment];
 
 // app.use(function(req, res, next){
 //     global.con = mysql.createConnection({
@@ -27,11 +32,17 @@ const app = express();
 
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(cors());
-const port = process.env.PORT || 4000;
+
+if (environment !== 'production') {
+    // app.use(logger('dev'));
+}
 
 app.use('/api/v1', Route);
 
-app.listen(port, function(){
- console.log('Listening on port ' + port);
+app.listen(`${stage.port}`, function(){
+ console.log('Listening on port ' + `${stage.port}`);
 });
