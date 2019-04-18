@@ -6,13 +6,13 @@ bodyParser = require('body-parser'),
 cors = require('cors'),
 mysql = require('mysql');
 
-import * as config from './config/config';
+import config from './config/config';
 import Route from './routes/v1/Route';
 
 const app = express();
 
 const environment = process.env.NODE_ENV; //development
-const stage = config.config[environment];
+const stage = config[environment];
 
 // app.use(function(req, res, next){
 //     global.con = mysql.createConnection({
