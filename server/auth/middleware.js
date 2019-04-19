@@ -11,9 +11,28 @@ function error(res, code, message) {
     });
 }
 
+const excludeAuthPaths = [
+    "/login"
+];
+
 const middleware = {
     async checkToken(req, res, next) {
         try {
+            let baseUrl = req.originalUrl;
+            let isSkip = false;
+
+            for (let path of excludeAuthPaths) {
+                if (baseUrl.contains(path)) {
+                    isSkip = true;
+                    break;
+                }
+            }
+
+            if (isSkip) {
+                req.jwt = null;
+                return next();
+            }
+
             let token = req.headers['x-access-token'] || req.headers['authorization'];
             if (token) {
                 if (token.startsWith('Bearer ')) {
@@ -23,9 +42,9 @@ const middleware = {
 
                 //decode token
 
-                let result = jwt.verify(token, config.secret);
+                const result = jwt.verify(token, config.secret);
                 req.jwt = result;
-                next();
+                return next();
             } else {
                 error(res, 403, 'Token is not supplied');
             }
